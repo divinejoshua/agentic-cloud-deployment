@@ -41,14 +41,22 @@ export default function Home() {
         aiResponse = "Getting started....I see it requires environment variables. Can you please share them.";
         setCurrentStep(1);
       } else if (currentStep === 1 && userMessage.includes('=')) {
-        aiResponse = "Thank you...Deploying now.\n\nDeployment is done, here is the URL: https://your-app-123.agentic-deploy.com";
+        aiResponse = "Thank you...Deploying now.";
         setCurrentStep(2);
+        // Add deployment completion message after a delay
+        setTimeout(() => {
+          addMessage('ai', "Deployment is done, here is the URL: https://your-app-123.agentic-deploy.com");
+        }, 2000);
       } else if (currentStep === 2 && userMessage.includes('custom domain')) {
         aiResponse = "I see. I will send you some records to put on your DNS now.\n\nCNAME Record:\nName: www\nValue: your-app-123.agentic-deploy.com\n\nA Record:\nName: @\nValue: 192.0.2.1";
         setCurrentStep(3);
       } else if (currentStep === 3 && userMessage.includes('DNS')) {
-        aiResponse = "Perfect, I have verified it and adding SSL now.\n\nAll done. Your website is live now at your custom domain!";
+        aiResponse = "Perfect, I have verified it and adding SSL now.";
         setCurrentStep(4);
+        // Add final completion message after a delay
+        setTimeout(() => {
+          addMessage('ai', "All done. Your website is live now at https://wetrocloud.com");
+        }, 2000);
       } else {
         aiResponse = "I'm here to help you deploy your project. Please share your GitHub repository URL to get started.";
       }
